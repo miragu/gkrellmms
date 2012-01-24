@@ -1,3 +1,15 @@
+GKrellMMS: GKrellM XMMS Plugin patched for Audacious
+The Audacious patch comes from Gentoo Linux but is no longer in the portage
+tree. The patch became broken with Audacious 3.x and GTK 3.x so I    
+decided to update it and publish it here:
+
+https://github.com/miragu/gkrellmms
+  
+Enjoy,  
+Tiago Sousa aka mirage
+
+------------------------ Original README follows -----------------------------
+
 GKrellMMS: GKrellM XMMS Plugin
 Orginal Author:     Sander Klein Lebbink <sander@cerberus.demon.nl>
 Current Maintainer: Sjoerd Simons <sjoerd@luon.net>
