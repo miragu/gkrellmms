@@ -1,0 +1,89 @@
+GKrellMMS FAQ:
+--------------
+
+This file answers some commonly asked questions.
+If you've got a problem installing gkrellmms, please first read this file
+before mailing me.
+
+Please, before mailing me, check your versions of GKrellM and XMMS.
+You can check your own versions by calling 'gkrellm --version' and 'xmms
+--version' in a shell.
+
+-----
+
+Q: When I open GKrellMMS, it freezes for about half a minute, and then
+   continues fine.
+
+A: You'll probably have set that GKrellMMS should load the entire
+   playlist-info while loading a new playlist.
+   You can unset this by doing these things:
+   In the gkrellmms-config-window, in the Switches-tab, set the 'Load
+   file-info:' to 'On File play only'.
+   After that, go to the XMMS Preferences-window, to the Options-tab. Unset
+   both toggles from the 'Read info on'.
+
+-----
+
+Q: GKrellMMS segfaults when I try to open an mp3-file from it.
+
+A: The eject-button in GKrellMMS can be set to open a playlist or other
+   files. It defaults to open a playlist. If you try to open an mp3 while
+   trying to open a playlist, it segfaults (oops). You can change this action
+   in the GKrellMMS-config window, in the Switches-tab. Set 'Eject-button
+   opens:' to 'File(s)' instead of 'Playlist', and it works.
+
+-----
+
+Q: When I run make, I get this message (or something familiar):
+
+   In file included from gkrellmms.c:21:
+   gkrellmms.h:21: gkrellm2/gkrellm.h: No such file or directory
+
+A: You'll have to install the newest gkrellm, and have installed the
+   gkrellm-header files to your includes-dir (normally /usr/include or
+   /usr/local/include)
+   You can get gkrellm at: http://gkrellm.net
+
+-----
+
+Q: When I run make, I get this message (or something familiar):
+
+   /usr/bin/ld: cannot find -lxmms
+
+A: You'll probably have installed xmms from a package; you'll also have to
+   install the xmms-devel package.
+
+-----
+
+Q: When I run make, I get this message (or something familiar):
+
+   gkrellmms.h:22: xmms/xmmsctrl.h: No such file or directory
+
+A: You'll have to install the xmms-devel package as well as the standard
+   xmms-package.
+
+-----
+
+Q: gkrellmms doesn't start, and in gkrellm's plugin-log shows up:
+
+   Error: /usr/lib/libxmms.so.1: undefined symbol: XF86VidModeSetViewPort
+
+A: This isn't a bug from gkrellmms, but from the xmms/X packages (I guess).
+   You can try to fix this by uninstalling xmms-devel, removing
+   /usr/lib/libxmms.*, and re-installing xmms-devel. I don't know if this
+   solution works for everybody; I didn't get this error myself, but I
+   know some people with which it worked.
+
+-----
+
+Q: I've got a segfault somewhere.
+
+A: Mail it to me!
+   Please include some info about the bug (when you got it, what versions of
+   gkrellm, xmms and gkrellmms you use, etc...) when mailing me.
+
+----------------------------------------------------
+FAQ made by Sander Klein Lebbink  <sander@cerberus.demon.nl>
+
+If you have any remarks/bugreports please send them to 
+Sjoerd Simons <sjoerd@luon.net>

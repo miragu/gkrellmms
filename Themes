@@ -1,0 +1,114 @@
+GKrellMMS: GKrellM XMMS Plugin
+
+Little Themes Documentation for the GKrellMMS version for GKrellM 2.0
+---------------------------------------------------------------------
+The XMMS buttons can be themed with images in a "gkrellmms" subdirectory
+of your theme.  The button images can be made in one of two formats.
+You can make the button out/clicked in one image with the button
+out image on top of the button clicked image.  These images should be
+named:
+
+    gkrellmms/prev_button.png
+    gkrellmms/play_button.png
+    gkrellmms/next_button.png
+    gkrellmms/stop_button.png
+    gkrellmms/eject_button.png
+
+Or, you can make the images in the style used for GKrellM 1.2.x themes.
+For these, the button out and button clicked images are drawn in
+separate image files named:
+
+    gkrellmms/prev.png
+    gkrellmms/prev_clicked.png
+    gkrellmms/play_pause.png
+    gkrellmms/play_pause_clicked.png
+    gkrellmms/stop.png
+    gkrellmms/stop_clicked.png
+    gkrellmms/next.png
+    gkrellmms/next_clicked.png
+    gkrellmms/eject.png
+    gkrellmms/eject_clicked.png
+
+The LED can also be themed with a vertical stack of four LEDs called:
+
+    gkrellmms/led_indicator.png
+
+where the vertical led frames are:
+    0: led off state
+    1: Briefly blinked on when xmms is running but playing is stopped.
+    2: Briefly blinked off when xmms is running and playing is paused.
+    3: On when xmms is running and playing.
+
+Of course the images can have other extensions.
+You can make the images in the formats: xpm, png, and jpg.
+
+The default button positioning will be according to the button layout
+used for GKrellM 1.2.x themes.  However, this version allows all buttons
+and the xmms label and the LED to be positioned anywhere.  To do this,
+set these values in the gkrellmrc (the example numbers here are similar
+to the default theme):
+
+set_string gkrellmms_play_button_position "-27 4 0 0 c"
+set_string gkrellmms_prev_button_position "-25 20 0 0 c"
+set_string gkrellmms_stop_button_position "-13 21 0 0 c"
+set_string gkrellmms_next_button_position "9 20 0 0 c"
+set_string gkrellmms_eject_button_position "17 12 0 0 c"
+set_string gkrellmms_led_position "7 7 c"
+set_string gkrellmms_label_position "-25 7 c"
+
+The string format for buttons is: "x y w h anchor"
+    where x is pixels offset from an anchor point
+          y is pixels offset from top of the panel
+          w is width to scale the button to, or zero to use the drawn width
+          h is height to scale the button to, or zero to use the drawn height
+
+The string format for led_position and label_position is: "x y anchor"
+The x,y positions for the buttons, led, and label places the top left corner.
+
+In all cases, the anchor can be l, c, or r:
+          l places the object x pixels to the right of the left panel edge
+          c places the object x pixels from the center of the panel
+          r places the object x pixels to the left of the right panel edge
+x values for l and r should be positive, but may be negative for c.
+
+In case you don't want any button panel at all use:
+  set_integer gkrellmms_show_buttons 0  
+
+-----------
+
+In addition to the above button images in the gkrellmms theme
+subdirectory, there can be a separate background set for the scrolling
+title:
+
+       gkrellmms/bg_scroll.png
+
+There can also be optional top and bottom spacer images that go above the
+scrolling title panel and below the button bar panel:
+
+       gkrellmms/bg_spacer_top.png
+       gkrellmms/bg_spacer_bottom.png
+
+And GKrellMMS theme parameters that can be set in a theme gkrellmrc are,
+(these are similar to the values used in the default theme):
+
+# Settings for the scrolling title panel:
+       StyleMeter gkrellmms.alt_textcolor = black #dcdccc shadow
+# If there is a separate bg_scroll image:
+       set_image_border gkrellmms_bg_scroll 3,3,2,2
+# Set margins around the scrolling text.  This panel uses extensions to the
+# base GKrellMMS style settings and these extensions are implemented
+# using set_integer:
+       set_integer gkrellmms_scroll_margin 2
+       set_integer gkrellmms_scroll_top_margin 2
+       set_integer gkrellmms_scroll_bottom_margin 1
+
+# Settings for the button bar panel.  These all use the base
+# GKrellMMS style and are set in the standard way:
+       StyleMeter gkrellmms.textcolor = #ffeac4 #000000 shadow
+       StyleMeter gkrellmms.border = 2,2,4,0
+       StyleMeter gkrellmms.margins = 2,2,2,0
+
+
+-----------------------------------------------------
+Comments, bugreports, and other stuff can be sent to:
+sjoerd@luon.net

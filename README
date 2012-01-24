@@ -1,0 +1,50 @@
+GKrellMMS: GKrellM XMMS Plugin
+Orginal Author:     Sander Klein Lebbink <sander@cerberus.demon.nl>
+Current Maintainer: Sjoerd Simons <sjoerd@luon.net>
+Homepage:  http://gkrellm.luon.net/
+
+A plugin for GKrellM, which allows you to control XMMS from within GKrellM.
+
+If you don't already know what it features, you can look at GKrellMMS's
+homepage (url mentioned above). Or read the help-text in the config-tab when
+you have gkrellmms running.
+
+To install:
+-----------
+
+1 - Be sure to have the latest gkrellm, or else the plugin could get in
+    trouble when you compile it!!
+
+2 - Unpack the gkrellmms tar.gz-file somewhere (if you haven't already)
+
+3 - Edit gkrellmms.h to fit your needs (where to place the plugin)
+         (Default is above the apm-monitor).
+    You can also set the gravity (0 to 15) of GKrellMMS for use with
+    multiple plugins which place themselves above the same monitor.
+    The higher the gravity, the lower a plugin will be placed compared to
+    other plugins with the same placement position.
+
+4 - Edit the Makefile to set a name for the gkrellmms-binary.
+      (without the .so!)
+    Standard is 'gkrellmms', which will put gkrellmms under the Volume-plugin,
+    when placed above the apm-monitor (which is default).
+
+5 - Compile the plugin. You'll have to type: make.
+    If you want i18n support, You'll have to type: enable_nls=1 make
+
+6 - To install the plugin as a system-wide plugin,
+    become root and type: make install
+    If you want i18n support, You'll have to type: enable_nls=1 make install
+
+    You can also Copy gkrellmms.so to ~/.gkrellm2/plugins/ if you don't have
+    root-perms on your machine, or don't need to have the plugin sys-wide.
+
+7 - Restart GKrellM, enable GKrellMMS if it's system-wide, and
+    you have your plugin. :)
+
+If things don't work, first read the FAQ-file to see if your problem is
+listed there. If it isn't, you can mail me your problem.
+
+-------------------------
+Bug reports, comments, suggestions, and all of that stuff can be sent to:
+sjoerd@luon.net

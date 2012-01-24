@@ -1,0 +1,231 @@
+GKrellMMS Changelog:
+
+2.1.22:
+- Added patch to use beep media player instead of xmms by 
+  Andreas Sundstrom <sunkan@zappa.cx> 
+- Don't freeze on certain weird strings when converting to utf-8
+
+2.1.21:
+- Spanish translation by Neri Antonio Mayer <nmayer@AlternativaGratis.com>
+- Let the Gkrellm Options menu actually open the options menu
+- Improvements to the code that checks if the playlists need to be updated.
+
+2.1.20:
+- Improve the string to utf8 translation function
+
+2.1.19:
+-  When both g_filename_to_utf8 and g_locale_to_utf8 fail, use the unconverted
+   string. Don't know if it's the right way, but fixes crashes with broken 
+   filenames.
+- Don't try to convert NULL. Fixes crash on empty playlist
+- Use special gkrellm 2.2.0 api for scrolling text. 
+   Patch by Bill Wilson <billw@wt.net> 
+- Use a g_spawn function instead of system to launch xmms, so xmms doesn't
+  inherit all open gkrellm file descriptors
+    Patch by Bill Wilson <billw@wt.net> 
+
+2.1.18:
+- When g_filename_to_utf8 fails fall back to g_locale_to_utf8. Fixes 100% cpu
+  usage when playing files with filenames in locale encoding.
+
+2.1.17:
+- Fixed memory leaks introduced in previous version.
+- Patch by Bill Wilson <billw@wt.net> to fix dependency on GdkFont and some
+  other cleanups
+
+2.1.16:
+- Fixed crash when updating playlist 
+  Thanks to Jan Tomasek <jan@tomasek.cz> for the pointer
+- Use the filename for title if we don't load the info
+- Add an item in the rmb menu to popup the gkrellmms config tab
+
+2.1.15:
+- Off by one error in the playlist updating code, caused the wrong title to
+  show. Found and patched by Andrew Kemp <ajwk@pell.uklinux.net>
+
+2.1.14:
+- Rewrote the playlist code
+  - Port from gtk clist to gtk treeview 
+  - Prepend playlist file path when the playlist path contains relative paths.
+- Cleaned up the update code and ported it to the new playlist stuff
+
+2.1.13:
+- Actually use the playlist directory setting
+
+2.1.12:
+- Fixed crash in update_plist_status, because of a off by one fault. Thanks to
+  Chris <chris@starforge.co.uk> for pointing this out.
+- Fixed parsing of playlist_dir, xmms_exec_command and files_directory config
+  file entry's
+- Quote files_directory when using it in system()
+
+2.1.11:
+- Fix memory allocation error
+
+2.1.10:
+- Check if xmms_remote_get_playlist_title returns NULL
+
+2.1.9:
+- Don't crash when opening an empty playlist/a directory as playlist
+- Possibility to open a playlist with more as 1024 files
+- Updated danish translation by Søren Boll Overgaard <boll@debian.org>
+- Little tweaks to the dutch translation
+
+2.1.8:
+- Check if xmms_remote_get_playlist_files returns NULL, fixes some segv's. 
+  Thanks to hint from Matthew "Cheetah" Gabeler-Lee <msg2@po.cwru.edu> 
+
+2.1.7:
+- Fixed polling the current song
+  
+
+2.1.6:
+- Patch bij Bill Wilson <bill@gkrellm.net> to support gkrellm scaling and
+  various small fixes
+- Danish translation by Søren Boll Overgaard <boll@debian.org>
+- Drag and Drop support.
+
+2.1.5:
+- Patch by  Marat Khairullin <xmm@rambler.ru> so xmms windows are also 
+  hidden when  starting xmms from gkrellm, when using autohide
+- Remove timer_t typo, should be time_t. Fixes compiling on some
+  distributions
+- French translation by Jérôme UZEL <jerome.uzel@free.fr>
+
+2.1.4:
+- Patch by Grigory Batalov <bga@altlinux.ru> for i18n
+- Russian translation by  Grigory Batalov <bga@altlinux.ru>
+- Dutch translation by Michiel Sikkes <michiels@luon.net>
+
+2.1.3:
+-  Added patch by Philip Jägenstedt <philipj@telia.com>, which allows xmms to
+   be hidden on gkrellmms startup
+
+2.1.2:
+- Added time.h to gkrellmms.h
+
+2.1.1:
+- Removed enable button panel options and added the possibility to not show
+    the buttons throught the theme config
+
+2.1:
+- Made heavy changes based on a patch by bill Wilson <bill@gkrellm.net> that:
+  * Enhances the theming capabilities (read the Themes file)
+  * Better use of the gkrellm provided functions 
+  * various other tiny enhancements
+
+2.0:
+- Port to gtk2 and gkrellm2, patch from Christian Hammond<chipx86@gnupdate.org>
+
+0.5.8:
+
+- Poll for the current song title. So the title changes when listening to
+  icecast streams which do title streaming. 
+
+0.5.7:
+- Maintance release. Put myself as the current maintainer <sjoerd@luon.net>
+- Added a \ in gkrellmms.c because some compilers complain about it.
+- Let make install install in /usr/local/lib/gkrellm by default
+  
+0.5.6:
+- Made GKrellMMS compile-able with GKrellM >= 1.2.9, contributed by Bill Wilson <bill@gkrellm.net>
+- Made scroll separator configurable, contributed by Alper Ersoy <dirt@tfz.net>
+
+0.5.5:
+- Changes for GKrellM 1.0.3 and 1.0.4 contributed by Bill Wilson <bill@gkrellm.net>
+- Some small bugfixes contributed by Thomas Moestl <tmoestl@gmx.net>
+- Minor Bugfixes, which could (also) solve some compile-problems.
+
+0.5.4:
+- Code changes/bugfixes for GKrellM 0.10.1
+
+0.5.3:
+- Changed default position to above the APM-monitor.
+  Read the IMPORTANT-file for more info...
+- Changed/removed some things for use of XMMS 1.2.1.
+- Changed time-bar jump function; doesn't jump to weird places anymore.
+- Code changes and theming support for GKrellM 0.10.0.
+  Theming support contributed by Bill Wilson <bill@gkrellm.net>.
+- Added tooltip with extra song-info in the scrolling title-bar.
+
+0.5.2:
+- Various little changes.
+- Made pixmaps-directory for the xpm's in the source-dir.
+- Fixed bug that kept xmms playing while opening new playlists (found it
+  really annoying, since I play mp3's from slow cdrom-players).
+- Noticed that I still used some functions who are going to be removed in
+  future gkrellm-releases. Fixed it.
+- Changed help-text functions to the gkrellm 0.9.9-functions.
+- Fixed some little bugs when playing modules (xm/etc..)
+- Fixed some hang-bug.
+- Changed scrollbar-layout and movement to XMMS-style.
+- GKrellMMS now also launches xmms on a panel-dubble-click.
+- Changed create_gkrellmms-function that it doesn't load any playlist
+  by itself when xmms is playing.
+
+0.5.1:
+- Fixed empty playlist segfault-bugs.
+- Fixed bug that caused gkrellms to not open playlists on theme-changing.
+
+0.5:
+- Changed time-bar so that the led should always be placed good.
+- Made ability to drag and drop the scroll-bar.
+- Added label-configurability.
+- Made some very little changes to the config-layout.
+- Fixed bug that caused gkrellmms to re-open the playlist when changing the
+  button-bar looks config.
+- Reduced some more memleaks.
+- Added a FAQ-file.
+- Fixed flickering xmms-text bug.
+- Made a start of a playlist-editor.
+- Received a patch from Bob the Galactic Janitor (Kevin Gardner)
+  <istar@wsunix.wsu.edu> to center the buttons, and make the buttons
+  resizeable.
+- Changed the auto-seek function.
+- Made the buttons themeable. Read the Themes-file for details.
+- Fixed position-save bug.
+- Added option to display remaining output-time.
+
+0.4:
+- Changed help-text layout.
+- Added config-option for what to do on mmb-click on the krell.
+- Changed gkrellmms.h for using gkrellm 0.9.8.
+- Changed alignment of the scrolling title.
+- Added automatic playlist-save and playlist-open/jump on xmms-kill/launch.
+- Changed config-tab layout.
+- Added option for displaying time in the time-panel.
+- fixed various memleaks (well, forcely reduced them at least).
+- fixed theme-change bug that caused segfaults, with help from Bill Wilson
+  <bill@gkrellm.net>.
+- Added names of people who helped me with the plugin to the Changelog.
+  It looked so egoistic without it. ;)
+
+0.3:
+- Changed README-layout to make it more read-friendly, contributed by
+  David Pollard <dp@dplinux.sund.ac.uk>.
+- Changed button-layout to get an eject-button in the button panel,
+  suggested by Charlie Yao <cyao2@san.rr.com>.
+- Added very simple playlist-support.
+- Added mouse-button-function.
+  Read the Help in the Config-tab for more info.
+- fixed stupid bug that kept restarting xmms when you kill it.
+- some other minor bugfixes.
+
+0.2:
+- You can now single-click on the Krell to jump-in-song.
+- Middle mouse-button-press on Krell now pauses/plays the song.
+- Added some documentation in the config-tab.
+- changed pause buttons.
+- scrolling title & buttons automatically enable/disable themself when
+  xmms is on/off.
+- Added configurability for:
+  -> manual xmms-executable
+  -> files-directory
+  -> xmms-session selection
+  -> auto xmms-start
+  -> auto mainwin-close on gkrellmms-startup
+  -> enable/disable title-scroll
+  -> enable/disable button-bar
+
+0.1:
+- First version.

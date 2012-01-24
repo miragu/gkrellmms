@@ -1,0 +1,641 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gkrellmms 2.1.4\n"
+"POT-Creation-Date: 2004-06-03 20:00+0100\n"
+"PO-Revision-Date: 2004-06-03 20:00+0100\n"
+"Last-Translator: Neri Antonio MAYER <nmayer@alternativagratis.com>\n"
+"Language-Team: Es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: options.c:99
+msgid "GKrellMMS Error"
+msgstr "Error de GKrellMMS"
+
+#: options.c:100
+msgid "Couldn't launch XMMS ;("
+msgstr "No se pudo ejecutar XMMS ;("
+
+#: options.c:132
+msgid "/Toggles..."
+msgstr "/Opciones..."
+
+#: options.c:133
+msgid "/Toggles.../Main Window"
+msgstr "/Opciones.../Ventana principal"
+
+#: options.c:134
+msgid "/Toggles.../Playlist"
+msgstr "/Opciones.../Lista de reproducción"
+
+#: options.c:135
+msgid "/Toggles.../EQ"
+msgstr "/Opciones.../Ecualizador"
+
+#: options.c:136
+msgid "/Toggles.../Repeat"
+msgstr "/Opciones.../Repetir"
+
+#: options.c:137
+msgid "/Toggles.../Shuffle"
+msgstr "/Opciones.../Aleatorio"
+
+#: options.c:138
+msgid "/Toggles.../-"
+msgstr "/Opciones.../-"
+
+#: options.c:139
+msgid "/Toggles.../Always on top on"
+msgstr "/Options.../Siempre arriba"
+
+#: options.c:140
+msgid "/Toggles.../Always on top off"
+msgstr "/Opciones.../Siempre arriba desactivado"
+
+#: options.c:143
+msgid "/Xmms.../Previous"
+msgstr "/XMMS.../Anterior"
+
+#: options.c:144
+msgid "/Xmms.../Play"
+msgstr "/XMMS.../Reproducir"
+
+#: options.c:145
+msgid "/Xmms.../Pause"
+msgstr "/XMMS.../Pausa"
+
+#: options.c:146
+msgid "/Xmms.../Stop"
+msgstr "/XMMS.../Detener"
+
+#: options.c:147
+msgid "/Xmms.../Next"
+msgstr "/XMMS.../Siguiente"
+
+#: options.c:149
+msgid "/Playlist Editor"
+msgstr "/Editor de la lista de reprodución"
+
+#: options.c:151
+msgid "/Open file(s)"
+msgstr "/Abrir archivo(s)"
+
+#: options.c:152
+msgid "/Open Playlist"
+msgstr "/Abrir lista de reproducción"
+
+#: options.c:153
+msgid "/XMMS Prefs"
+msgstr "/Preferencias de XMMS"
+
+#: options.c:155
+msgid "/Quit XMMS"
+msgstr "/Salir de XMMS"
+
+#: options.c:162
+msgid "/Launch XMMS"
+msgstr "/Ejecutar XMMS"
+
+#: options.c:394
+msgid ""
+"GKrellMMS is a GKrellM XMMS-plugin which allows you to control \n"
+"XMMS from within GKrellM. It features some cool things, such as: \n"
+"\n"
+"- A scrolling title. \n"
+"- A Krell which indicates where you are in a song. \n"
+"- Themeable buttons for controlling XMMS. \n"
+"- A playlist editor. \n"
+"- A gtk-popup-menu with misc. XMMS-functions. \n"
+"\n"
+msgstr ""
+"GKrellMMS es un plugin GKrellM para XMMS que te permite controlar\n"
+"XMMS desde GKrellM. Se destacan algunas funcionalidades como:\n"
+"\n"
+"- Desplazaaiento del título\n"
+"- Un Krell que indica donde estás en una canción\n"
+"- Botones temables para controlar XMMS\n"
+"- Un editor de la lista de reproducción\n"
+"- Un menú GTK emergente con diferentes funciones de XMMS\n"
+"\n"
+
+#: options.c:404
+msgid "<b>How to use GKrellMMS: \n"
+msgstr "<b>Como utilizar GKrellMMS: \n"
+
+#: options.c:405
+msgid ""
+"\n"
+"You can do some cool stuff with the XMMS-Krell, by using your mouse. \n"
+"\n"
+msgstr "\nPuedes hacer algunas acciones interesantes con el XMMS-Krell,usando el mouse.\n\n"
+
+#: options.c:409
+msgid ""
+"<b>Mouse actions: \n"
+"\n"
+"\tLeft mouse-button: "
+msgstr ""
+"<b>Acciones del mouse:\n"
+"\n"
+"\tBotón izquierdo: "
+
+#: options.c:411
+msgid "Jump through song. \n"
+msgstr "Saltar la canción.\n"
+
+#: options.c:413
+msgid "<b>\tMiddle mouse-button: "
+msgstr "<b>\tBotón del medio: "
+
+#: options.c:414
+msgid ""
+"Pause/stop/play XMMS (configurable), \n"
+"\t  or launch XMMS if it's not running. \n"
+msgstr "Pausar/Detener/Reproducir XMMS (configurable), \n"
+"\t  o ejecutar XMMS si no está corriendo.\n"
+
+#: options.c:417
+msgid "<b>\tRight mouse-button: "
+msgstr "<b>\tBotón derecho del mouse: "
+
+#: options.c:418
+msgid ""
+"Popup-menu. \n"
+"\n"
+"The led indicator on the Krell indicates several things: \n"
+"\n"
+msgstr ""
+"Menú emergente\n"
+"\n"
+"El botón luminoso sobre el Krell indica varias cosas:\n"
+"\n"
+
+#: options.c:423
+msgid "<b>\tConstant red: "
+msgstr "<b>\tRouge fixe: "
+
+#: options.c:424
+msgid "XMMS is turned off. \n"
+msgstr "XMMS está apagado.\n"
+
+#: options.c:426
+msgid "<b>\tConstant green: "
+msgstr "<b>\tVerde constante: "
+
+#: options.c:427
+msgid "XMMS is playing. \n"
+msgstr "XMMS está reproduciendo.\n"
+
+#: options.c:429
+msgid "<b>\tRed, blinking green: "
+msgstr "<b>\tRojo, verde parpadeante: "
+
+#: options.c:430
+msgid "XMMS is stopped. \n"
+msgstr "XMMS está detenido.\n"
+
+#: options.c:432
+msgid "<b>\tGreen, blinking red: "
+msgstr "<b>\tVerde, rojo parpadeante: "
+
+#: options.c:433
+msgid ""
+"XMMS is paused. \n"
+"\n"
+msgstr "XMMS está en pausa.\n\n"
+
+#: options.c:436
+msgid "<b>Configurabilities:\n"
+msgstr "<b>Configuración:\n"
+
+#: options.c:437
+msgid ""
+"\n"
+"GKrellM has some configurabilities for if you like to \n"
+"configure some stuff:\n"
+"\n"
+msgstr "\nGKrellM posee algunos parametros configurables:\n\n"
+
+#: options.c:442
+msgid ""
+"<b>Configs tab: \n"
+"\n"
+"\tXMMS Executable: \n"
+msgstr ""
+"<b>Panel de configuración:\n"
+"\n"
+"\tEjecutable de XMMS:\n"
+
+#: options.c:446
+msgid ""
+"\tHow the XMMS-executable (+ eventually path) \n"
+"\tis called on your computer. Default is xmms\n"
+"\n"
+msgstr ""
+"\tComo el ejecutable de XMMS (+ eventualmente el path)\n"
+"\tes llamado por tu computadora. Por defecto es XMMS\n"
+"\n"
+
+#: options.c:450
+msgid "<b>\tFiles Directory: \n"
+msgstr "<b>\tCarpeta de archivos: \n"
+
+#: options.c:451
+msgid ""
+"\tThe directory where your mp3's/xm's/whatever \n"
+"\tare stored in. When starting XMMS from GKrellM, it will go to this \n"
+"\tdirectory when ejecting. \n"
+"\n"
+msgstr ""
+"\tLa carpeta donde se guardan sus archivos mp3/xm.\n"
+"\tCuando inicia XMMS desde GKrellM, éste se posicionará en esta carpeta\n"
+"\tcuando pulse el botón expulsar.\n"
+"\n"
+
+#: options.c:456
+msgid "<b>\tPlaylist Directory: \n"
+msgstr "<b>\tCarpeta de lista de reproducción:\n"
+
+#: options.c:457
+msgid ""
+"\tThe directory where your m3u-files are stored in. \n"
+"\n"
+msgstr "\tLa carpeta donde sus archivos m3u son guardados.\n\n"
+
+#: options.c:460
+msgid "<b>\tKrell label: \n"
+msgstr "<b>\tEtiqueta del Krell:\n"
+
+#: options.c:461
+msgid ""
+"\tThe text-label you want in the krell when xmms isn't running/playing. \n"
+"\n"
+msgstr ""
+"\tEl texto de la etiqueta que quiere en el Krell cuando XMMS está \n"
+"\tejecutando/reproduciendo\n"
+"\n"
+
+#: options.c:464
+msgid "<b>\tScroll separator: \n"
+msgstr "<b>\tSeparador de desplazamiento:\n"
+
+#: options.c:465
+msgid ""
+"\tThe little text that will be appended at the end of the scrolled text. \n"
+"\tIt defaults to '   ***   ' (that's 3 spaces, 3 *'s and 3 spaces). \n"
+"\n"
+msgstr ""
+"\tEl pequeño texto que aparece al final del texto en desplazamiento.\n"
+"\tPor defecto es '   ***   ' (3 espacios, 3 * y 3 espacios)\n"
+"\n"
+
+#: options.c:469
+msgid "<b>\tXMMS Session to use: \n"
+msgstr "<b>\tSesión a usar por XMMS:\n"
+
+#: options.c:470
+msgid ""
+"\tThe XMMS-session you want to use with GKrellMMS. \n"
+"\tUse 0 if you only have 1 XMMS running. \n"
+"\n"
+msgstr ""
+"\tLa sesión XMMS que quiere utilizar con GKrellMMS.\n"
+"\tUtilize 0 si solamente tiene un XMMS ejecutandosé.\n"
+"\n"
+
+#: options.c:474
+msgid ""
+"<b>Toggles tab: \n"
+"\n"
+"\tDraw minus (-) with remaining time: \n"
+msgstr ""
+"<b>Panel de opciones:\n"
+"\n"
+"\tSigno menos (-) para el tiempo restante:\n"
+
+#: options.c:478
+msgid ""
+"\tDraw a minus (-) before the remaining time, when you have \n"
+"\tthe output-time displaying remaining time. \n"
+"\n"
+msgstr ""
+"\tDibuja un menos (-) antes del tiempo restante, cuando tienes\n"
+"\tla salida mostrando el tiempo restante.\n"
+"\n"
+
+#: options.c:481
+msgid "<b>\tXMMS Auto Launch: \n"
+msgstr "<b>\tEjecutar XMMS automáticamente: \n"
+
+#: options.c:482
+msgid ""
+"\tAuto launch XMMS when starting GKrellMMS. \n"
+"\n"
+msgstr "\tEjecutar XMMS automáticamente Lancer cuando se inicie GKrellMMS.\n\n"
+
+#: options.c:485
+msgid "<b>\tAuto Mainwindow Close: \n"
+msgstr "<b>\tCerrar automáticamente la ventana principal:\n"
+
+#: options.c:486
+msgid ""
+"\tAutomatically close the XMMS-mainwindow \n"
+"\twhen GKrellMMS starts, and XMMS is already running, or when \n"
+"\tlaunching XMMS while GKrellMMS runs. This option also enables the \n"
+"\tmainwindow back when you quit gkrellm (some people really do). \n"
+"\n"
+msgstr ""
+"\tCierra automáticamente la ventana principal deXMMS\n"
+"\tcuando GKrellMMS inicia, y XMMS está ejecutandosé, o cuando\n"
+"\tXMMS se ejecuta mientras GKrellMMS corre .Esta opsion tambien habilita\n"
+"\tla ventana principal cuando se sale de GKrellM.\n"
+"\n"
+
+#: options.c:492
+msgid "<b>\tAuto hide all XMMS windows: \n"
+msgstr "<b>\tOcultar automáticamente todas las ventanas de XMMS:\n"
+
+#: options.c:493
+msgid ""
+"\tAutomatically hide all XMMS windows when GKrellMMS starts. \n"
+"\n"
+msgstr ""
+"\tOcultar automáticamente todas las ventanas de XMMS cuando\n"
+"\tGKrellMMS se inicia.\n"
+"\n"
+
+#: options.c:496
+msgid "<b>\tAuto seek on XMMS launch: \n"
+msgstr "<b>\tBuscar automáticamente al ejecutar XMMS:\n"
+
+#: options.c:497
+msgid ""
+"\tLet GKrellMMS jump to the location you were the \n"
+"\tlast time you killed XMMS from within GKrellMMS. \n"
+"\n"
+msgstr ""
+"\tPermite a GKrellMMS saltar a la posición que estaba\n"
+"\tla última vez que mataste a XMMS desde dentro de GKrellMMS.\n"
+"\n"
+
+#: options.c:500
+msgid "<b>\tAuto start playing: \n"
+msgstr "<b>\tIniciar automáticamente la reproduccíon:\n"
+
+#: options.c:501
+msgid ""
+"\tAutomatically start playing when launching XMMS. \n"
+"\n"
+msgstr "\tComenzar la reproducción automáticamente caundo se ejecuta XMMS.\n"
+"\n"
+
+#: options.c:503
+msgid "<b>\tEnable scrolling title: \n"
+msgstr "<b>\tActivar el desplazamiento del título:\n"
+
+#: options.c:504
+msgid ""
+"\tEnable/disable the scrolling title-panel. \n"
+"\n"
+msgstr "\tActivar/desactivar el desplazamiento del título del panel.\n\n"
+
+#: options.c:507
+msgid ""
+"<b>Switches tab: \n"
+"\n"
+"\tEject opens: \n"
+msgstr ""
+"<b>Panel de interruptores:\n"
+"\n"
+"\tEl botón expulsar abre:\n"
+
+#: options.c:511
+msgid ""
+"\tCheck whether the eject-button on the button-bar opens a \n"
+"\tplaylist or an other XMMS-file. \n"
+"\n"
+msgstr ""
+"\tCompruebe si el botón expulsar en la barra de botones abre \n"
+"\tla lista de reproducción u otro archivo XMMS.\n"
+"\n"
+
+#: options.c:515
+msgid "<b>\tMMB on krell click: \n"
+msgstr "<b>\tMMB click sobre krell:\n"
+
+#: options.c:516
+msgid ""
+"\tCheck whether GKrellMMS should pause/continue or \n"
+"\tstop/play the current song on a MMB-click on the krell. MMB Click will \n"
+"\talways start playing the song if XMMS isn't playing. \n"
+"\n"
+msgstr ""
+"\tCompruebe si GKrellMMS pausa/reproduce o\n"
+"\tdetiene/reproduce la canción actual en un click MMBen el krell.\n"
+"\tUn click MMB comenzará la reproducción de la canción sí XMMS no \n"
+"\testá reproduciendo.\n"
+"\n"
+
+#: options.c:521
+msgid "<b>\tLoad file-info: \n"
+msgstr "<b>\tCargar la información del archivo:\n"
+
+#: options.c:522
+msgid ""
+"\tCheck if GKrellMMS should load all the playlist-info at \n"
+"\tplaylist-load (Always), or at file-load (On File play only). \n"
+"\tThis last option is very useful if you don't use the local \n"
+"\tplaylist editor, or are playing on a slow network/cdrom. \n"
+"\n"
+msgstr ""
+"\tCompruebe si GKrellMMS carga toda la información de la lista de \n"
+"\treproduccíon en la carga de la lista de reproduccíón (siempre),\n"
+"\to en la carga del archivo (en la reproducción del archivo solamente).\n"
+"\tEsta última opción es muy útil si no utiliza el editor local de la  \n"
+"\tlista de reproducción, o está reproduciendo en una red/cdrom lento\n"
+"\n"
+
+#: options.c:527
+msgid "<b>\tDraw in time bar: \n"
+msgstr "<b>\tDibujar en la barra de tiempo:\n"
+
+#: options.c:528
+msgid ""
+"\tCheck whether to draw the output time or 'xmms' in \n"
+"\tthe time-krell panel. \n"
+"\n"
+msgstr ""
+"\tCompruebe si dibuja en la salida el tiempo o 'xmms' en \n"
+"\tel panel del krell.\n"
+"\n"
+
+#: options.c:532
+msgid "<b>\tOutput time format: \n"
+msgstr "<b>\tFormato del tiempo de la salida:\n"
+
+#: options.c:533
+msgid ""
+"\tDecide whether to draw the elapsed time, or the remaining time \n"
+"\tas output-time in the Krell. \n"
+msgstr ""
+"\tDecida si dibujar el tiempo transcurrido, o el tiempo restante,\n"
+"\tcomo la salida en el Krell.\n"
+
+#: options.c:552
+msgid "XMMS Executable:"
+msgstr "Ejecutable XMMS:"
+
+#: options.c:554
+msgid "Files Directory:"
+msgstr "Carpeta de archivos:"
+
+#: options.c:556
+msgid "Playlist Directory:"
+msgstr "Carpeta del la lista de reproduccion:"
+
+#: options.c:558
+msgid "Krell label:"
+msgstr "Etiquetas del Krell:"
+
+#: options.c:560
+msgid "Scroll separator:"
+msgstr "Separador de desplazamiento:"
+
+#: options.c:600
+msgid "XMMS Session to use"
+msgstr "Sesión XMMS a utilizar"
+
+#: options.c:604
+msgid "Configs"
+msgstr "Configuración"
+
+#: options.c:615
+msgid "Draw minus (-) when displaying remaining time"
+msgstr "Dibujar un signo menos (-) cuando se visualiza el tiempo restante"
+
+#: options.c:619
+msgid "Auto launch XMMS on GKrellMMS startup"
+msgstr "Iniciar automáticamente XMMS al ejecutar GKrellMMS"
+
+#: options.c:623
+msgid "Auto close (and open) XMMS Mainwin"
+msgstr "Cerrar (o abrir) automáticamente la ventana principal de XMMS"
+
+#: options.c:627
+msgid "Auto hide all XMMS windows on GKrellMMS startup"
+msgstr "Ocultar automáticamente todas las ventanas de XMMS al ejecutar GKrellMMS"
+
+#: options.c:631
+msgid "Auto seek to last location on XMMS launch"
+msgstr "Posicionamiento automático al ejecutar XMMS"
+
+#: options.c:635
+msgid "Auto start playing on XMMS launch"
+msgstr "Iniciar automáticamente la reproduccion al ejecutar XMMS"
+
+#: options.c:639
+msgid "Enable scrolling title panel"
+msgstr "Activar el desplazamiento del panel de titulo"
+
+#: options.c:644
+msgid "Toggles"
+msgstr "Opciones"
+
+#: options.c:661
+msgid "Eject-button opens:"
+msgstr "El botón expulsar abre:"
+
+#: options.c:666
+msgid "Playlist"
+msgstr "Lista de reproducción"
+
+#: options.c:673
+msgid "File(s)"
+msgstr "Archivo(s)"
+
+#: options.c:687
+msgid "Draw in time bar:"
+msgstr "Dibujar en la barra de tiempo:"
+
+#: options.c:692
+msgid "Output time"
+msgstr "Tiempo de salida"
+
+#: options.c:699
+msgid "XMMS-text"
+msgstr "Texto XMMS"
+
+#: options.c:717
+msgid "Middle mouse click on krell will:"
+msgstr "Click del botón del medio sobre krell :"
+
+#: options.c:722
+msgid "Pause/Continue song"
+msgstr "Suspender/continuar la canción"
+
+#: options.c:729
+msgid "Stop/Play song"
+msgstr "Detener/Reproducir la canción"
+
+#: options.c:743
+msgid "Output time format:"
+msgstr "Formato del tiempo:"
+
+#: options.c:748
+msgid "Elapsed time"
+msgstr "Tiempo transcurrido"
+
+#: options.c:755
+msgid "Remaining time"
+msgstr "Tiempo restante"
+
+#: options.c:773
+msgid "Load file-info:"
+msgstr "Cargar información del archivo"
+
+#: options.c:778
+msgid "Always"
+msgstr "Siempre"
+
+#: options.c:785
+msgid "On File play only"
+msgstr "Solamente al reproducir el archivo"
+
+#: options.c:802
+msgid "Switches"
+msgstr "Interruptores"
+
+#: options.c:808
+msgid "Help"
+msgstr "Ayuda"
+
+#: options.c:818
+#, c-format
+msgid ""
+"GKrellMMS %d.%d.%d\n"
+"GKrellM XMMS Plugin\n"
+"\n"
+"Copyright (C) 2000-2002 Sander Klein Lebbink <sander@cerberus.demon.nl>\n"
+"Current Maintainer: Sjoerd Simons <sjoerd@luon.net>\n"
+"http://gkrellm.luon.net/\n"
+"\n"
+"Released under the GNU Public License\n"
+msgstr ""
+"GKrellMMS %d.%d.%d\n"
+"Plugin GKrellM XMMS\n"
+"\n"
+"Copyright (C) 2000-2002 Sander Klein Lebbink <sander@cerberus.demon.nl>\n"
+"Sostén actual: Sjoerd Simons <sjoerd@luon.net>\n"
+"http://gkrellm.luon.net/\n"
+"\n"
+"Liberado bajo la Licencia Pública GNU\n"
+
+#: options.c:829
+msgid "About"
+msgstr "Acerca de"
