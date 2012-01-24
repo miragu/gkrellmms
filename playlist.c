@@ -107,16 +107,16 @@ int pl_get_current_position() {
 void update_playlist_position(void) {
   GtkTreeIter iter;
 
-  current_position = xmms_remote_get_playlist_pos(xmms_session) + 1;
+  current_position = audacious_remote_get_playlist_pos(proxy) + 1;
   g_free(current_title);
   g_free(current_file);
   if (gtk_tree_model_iter_nth_child(GTK_TREE_MODEL(playlist),
                                 &iter, NULL, current_position -1))  {
-    current_file = xmms_remote_get_playlist_file(xmms_session,
+    current_file = audacious_remote_get_playlist_file(proxy,
                                                      current_position -1);
-    current_title = xmms_remote_get_playlist_title(xmms_session,
+    current_title = audacious_remote_get_playlist_title(proxy,
                                                      current_position -1);
-    current_time =  xmms_remote_get_playlist_time(xmms_session,
+    current_time =  audacious_remote_get_playlist_time(proxy,
                                                      current_position -1);
 
     current_file = string_to_utf8(current_file, TRUE);
@@ -154,13 +154,13 @@ load_playlist(void) {
 
   total_plist_time = 0;
 
-  if (!xmms_remote_is_running(xmms_session)) return;
+  if (!audacious_remote_is_running(proxy)) return;
 
-  len = xmms_remote_get_playlist_length(xmms_session);
+  len = audacious_remote_get_playlist_length(proxy);
   playlist_length = len;
 
   for (i = 0 ; i < len ; i ++) {
-    filename =  xmms_remote_get_playlist_file(xmms_session, i);
+    filename =  audacious_remote_get_playlist_file(proxy, i);
     if (filename == NULL) {
       /* error occurred empty playlist and try again */
       empty_playlist();
@@ -173,11 +173,11 @@ load_playlist(void) {
 
     gtk_list_store_append(playlist,&iter);
     if (always_load_info) {
-      title = xmms_remote_get_playlist_title(xmms_session, i);
+      title = audacious_remote_get_playlist_title(proxy, i);
       if (title != NULL) { 
         title = string_to_utf8(title, FALSE);
       } 
-      time = xmms_remote_get_playlist_time(xmms_session, i);
+      time = audacious_remote_get_playlist_time(proxy, i);
       gtk_list_store_set(playlist,&iter,
                          PLAYLIST_POSITION,i+ 1,
                          PLAYLIST_TITLE,title == NULL ? "" : title,
@@ -206,13 +206,14 @@ update_playlist(void) {
   char *filename = NULL;
 
   /* playlist lenght changed, reload */
-  if (playlist_length != xmms_remote_get_playlist_length(xmms_session)) {
+  if (playlist_length != audacious_remote_get_playlist_length(proxy)) {
     empty_playlist();
+    playlist_length = -1;
     load_playlist();
     return TRUE;
   }
   filename = string_to_utf8(
-               xmms_remote_get_playlist_file(xmms_session,current_position-1),
+               audacious_remote_get_playlist_file(proxy,current_position-1),
                TRUE
              );
   
@@ -224,7 +225,7 @@ update_playlist(void) {
   }
   g_free(filename);
 
-  if (xmms_remote_get_playlist_pos(xmms_session) != current_position + 1) {
+  if (audacious_remote_get_playlist_pos(proxy) != current_position + 1) {
     update_playlist_position();
   }
   return TRUE;
@@ -273,9 +274,9 @@ open_playlist_file_choosen(GtkWidget *w, gpointer selector) {
     }
     list = g_list_append(list,path);
   }
-  if (xmms_remote_is_running(xmms_session)) {
-    xmms_remote_playlist_clear(xmms_session);
-    xmms_remote_playlist_add(xmms_session, list);
+  if (audacious_remote_is_running(proxy)) {
+    audacious_remote_playlist_clear(proxy);
+    audacious_remote_playlist_add(proxy, list);
   }
 
   for (tlist = list; tlist != NULL; tlist = g_list_next(tlist)) {
@@ -386,8 +387,8 @@ playlist_row_activated_cb(GtkTreeView *treeview, GtkTreePath *path,
   gtk_tree_model_get(GTK_TREE_MODEL(playlist),&iter,
                      PLAYLIST_POSITION,&position,
                      -1);
-  xmms_remote_set_playlist_pos(xmms_session,position - 1);
-  xmms_remote_play(xmms_session);
+  audacious_remote_set_playlist_pos(proxy,position - 1);
+  audacious_remote_play(proxy);
   return TRUE;
 }
 

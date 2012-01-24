@@ -26,7 +26,6 @@ static GtkWidget *exec_entry,
                  *playlist_dir_entry,
                  *label_entry,
                  *separator_entry,
-                 *session_entry,
                  *xmms_start_entry,
                  *scroll_enable_entry,
                  *main_close_entry,
@@ -52,28 +51,28 @@ void toggles_func (GtkWidget *w, gpointer what)
   switch (type)
   {
     case gkrellmms_mainwin:
-      xmms_remote_main_win_toggle(xmms_session,
-        !xmms_remote_is_main_win(xmms_session));
+      audacious_remote_main_win_toggle(proxy,
+        !audacious_remote_is_main_win(proxy));
       break;
     case gkrellmms_playlist:
-      xmms_remote_pl_win_toggle(xmms_session,
-        !xmms_remote_is_pl_win(xmms_session));
+      audacious_remote_pl_win_toggle(proxy,
+        !audacious_remote_is_pl_win(proxy));
       break;
     case gkrellmms_eq:
-      xmms_remote_eq_win_toggle(xmms_session,
-        !xmms_remote_is_eq_win(xmms_session));
+      audacious_remote_eq_win_toggle(proxy,
+        !audacious_remote_is_eq_win(proxy));
       break;
     case gkrellmms_repeat:
-      xmms_remote_toggle_repeat(xmms_session);
+      audacious_remote_toggle_repeat(proxy);
       break;
     case gkrellmms_shuffle:
-      xmms_remote_toggle_shuffle(xmms_session);
+      audacious_remote_toggle_shuffle(proxy);
       break;
     case gkrellmms_eject:
-      xmms_remote_eject(xmms_session);
+      audacious_remote_eject(proxy);
       break;
     case gkrellmms_prefs:
-      xmms_remote_show_prefs_box(xmms_session);
+      audacious_remote_show_prefs_box(proxy);
       break;
     default:
       do_xmms_command(type);
@@ -83,7 +82,7 @@ void toggles_func (GtkWidget *w, gpointer what)
 
 void aot_func(GtkWidget *w, gpointer data)
 {
-  xmms_remote_toggle_aot(xmms_session, GPOINTER_TO_INT(data));
+  audacious_remote_toggle_aot(proxy, GPOINTER_TO_INT(data));
 }
 
 void save_time(gint);
@@ -118,15 +117,15 @@ void xmms_start_func ()
 	 */
   /* FIXME supposed ugly evil code */
   timer = time(&lt);
-  while (!xmms_remote_is_running(xmms_session) && ((time(&lt) - timer) < 10))
+  while (!audacious_remote_is_running(proxy) && ((time(&lt) - timer) < 10))
 				usleep(0);
 
-	xmms_running = xmms_remote_is_running(xmms_session);
+	xmms_running = audacious_remote_is_running(proxy);
 
 	if (auto_hide_all && xmms_running) {
-    xmms_remote_main_win_toggle(xmms_session, FALSE);
-    xmms_remote_pl_win_toggle(xmms_session, FALSE);
-    xmms_remote_eq_win_toggle(xmms_session, FALSE);
+    audacious_remote_main_win_toggle(proxy, FALSE);
+    audacious_remote_pl_win_toggle(proxy, FALSE);
+    audacious_remote_eq_win_toggle(proxy, FALSE);
 	}
 }
 
@@ -143,8 +142,8 @@ void quit_func (GtkWidget *w, gpointer data)
   time(&lt);
   timer = lt;
 
-  xmms_remote_quit(xmms_session);
-  while (xmms_remote_is_running(xmms_session)
+  audacious_remote_quit(proxy);
+  while (audacious_remote_is_running(proxy)
          && ((time(&lt) - timer) < 10)) {
     /* Do nothing; wait until xmms really quits, but not longer than 10sec! */
     usleep(0);
@@ -167,40 +166,36 @@ static void open_options_cb(GtkWidget *widget, gpointer data) {
 
 static GtkItemFactoryEntry gkrellmms_factory[] =
 {
-  {"/-",                            NULL, NULL,          0,        "<Separator>"},
-  {N_("/Toggles..."),                   NULL, NULL,          0,        "<Branch>"},
-  {N_("/Toggles.../Main Window"),       NULL, toggles_func,  gkrellmms_mainwin,  "<Item>"},
-  {N_("/Toggles.../Playlist"),          NULL, toggles_func,  gkrellmms_playlist, "<Item>"},
-  {N_("/Toggles.../EQ"),                NULL, toggles_func,  gkrellmms_eq,       "<Item>"},
-  {N_("/Toggles.../Repeat"),            NULL, toggles_func,  gkrellmms_repeat,   "<Item>"},
-  {N_("/Toggles.../Shuffle"),           NULL, toggles_func,  gkrellmms_shuffle,  "<Item>"},
-  {N_("/Toggles.../-"),                 NULL, NULL,          0,        "<Separator>"},
-  {N_("/Toggles.../Always on top on"),  NULL, aot_func,      ON,       "<Item>"},
-  {N_("/Toggles.../Always on top off"), NULL, aot_func,      OFF,      "<Item>"},
+  {N_("/Toggles"),                   NULL, NULL,          0,        "<Branch>"},
+  {N_("/Toggles/Main Window"),       NULL, toggles_func,  gkrellmms_mainwin,  "<Item>"},
+  {N_("/Toggles/Playlist"),          NULL, toggles_func,  gkrellmms_playlist, "<Item>"},
+  {N_("/Toggles/EQ"),                NULL, toggles_func,  gkrellmms_eq,       "<Item>"},
+  {N_("/Toggles/Repeat"),            NULL, toggles_func,  gkrellmms_repeat,   "<Item>"},
+  {N_("/Toggles/Shuffle"),           NULL, toggles_func,  gkrellmms_shuffle,  "<Item>"},
+  {N_("/Toggles/-"),                 NULL, NULL,          0,        "<Separator>"},
+  {N_("/Toggles/Always on top on"),  NULL, aot_func,      ON,       "<Item>"},
+  {N_("/Toggles/Always on top off"), NULL, aot_func,      OFF,      "<Item>"},
   {"/-",                                NULL, NULL,          0,        "<Separator>"},
-  {"/Xmms...",                          NULL, NULL,          0,        "<Branch>"},
-  {N_("/Xmms.../Previous"),             NULL, toggles_func,  gkrellmms_prev,     "<Item>"},
-  {N_("/Xmms.../Play"),                 NULL, toggles_func,  gkrellmms_play,     "<Item>"},
-  {N_("/Xmms.../Pause"),                NULL, toggles_func,  gkrellmms_paus,     "<Item>"},
-  {N_("/Xmms.../Stop"),                 NULL, toggles_func,  gkrellmms_stop,     "<Item>"},
-  {N_("/Xmms.../Next"),                 NULL, toggles_func,  gkrellmms_next,     "<Item>"},
+  {"/Audacious",                          NULL, NULL,          0,        "<Branch>"},
+  {N_("/Audacious/Previous"),             NULL, toggles_func,  gkrellmms_prev,     "<Item>"},
+  {N_("/Audacious/Play"),                 NULL, toggles_func,  gkrellmms_play,     "<Item>"},
+  {N_("/Audacious/Pause"),                NULL, toggles_func,  gkrellmms_paus,     "<Item>"},
+  {N_("/Audacious/Stop"),                 NULL, toggles_func,  gkrellmms_stop,     "<Item>"},
+  {N_("/Audacious/Next"),                 NULL, toggles_func,  gkrellmms_next,     "<Item>"},
   {"/-",                                NULL, NULL,          0,        "<Separator>"},
   {N_("/Playlist Editor"),              NULL, open_playlist_cb, 0,        "<Item>"},
   {N_("/GKrellMMS Options"),            NULL, open_options_cb, 0,        "<Item>"},
   {"/-",                                NULL, NULL,          0,        "<Separator>"},
   {N_("/Open file(s)"),                 NULL, toggles_func,  gkrellmms_eject,    "<Item>"},
   {N_("/Open Playlist"),                NULL, load_playlist_cb,  0,        "<Item>"},
-  {N_("/XMMS Prefs"),                   NULL, toggles_func,  gkrellmms_prefs,    "<Item>"},
+  {N_("/Audacious Preferences"),                   NULL, toggles_func,  gkrellmms_prefs,    "<Item>"},
   {"/-",                                NULL, NULL,          0,        "<Separator>"},
-  {N_("/Quit XMMS"),                    NULL, quit_func,     0,        "<Item>"},
-  {"/-",                                NULL, NULL,          0,        "<Separator>"},
+  {N_("/Quit Audacious"),                    NULL, quit_func,     0,        "<Item>"},
 };
 
 static GtkItemFactoryEntry gkrellmms_factory_norun[] =
 {
-  {"/-",                           NULL, NULL,          0,    "<Separator>"},
-  {N_("/Launch XMMS"),                 NULL, start_func,    0,    "<Item>"},
-  {"/-",                           NULL, NULL,          0,    "<Separator>"},
+  {N_("/Launch Audacious"),                 NULL, start_func,    0,    "<Item>"},
 };
 
 GtkItemFactory *options_menu_factory(gint run_menu)
@@ -261,9 +256,6 @@ void apply_gkrellmms_config()
   scroll_separator = g_strdup(gtk_entry_get_text(GTK_ENTRY(separator_entry)));
 	gkrellmms_set_scroll_separator_len();
 
-  xmms_session = gtk_spin_button_get_value_as_int(
-                                                GTK_SPIN_BUTTON(session_entry));
-
   /* Toggles */
   prev_scroll_enable = scroll_enable;
   scroll_enable = GTK_TOGGLE_BUTTON(scroll_enable_entry)->active;
@@ -284,7 +276,6 @@ void apply_gkrellmms_config()
 void save_gkrellmms_config(FILE *f)
 {
   fprintf(f, "%s scroll_enable %d\n", CONFIG_KEYWORD, scroll_enable);
-  fprintf(f, "%s xmms_session %d\n", CONFIG_KEYWORD, xmms_session);
   fprintf(f, "%s draw_time %d\n", CONFIG_KEYWORD, draw_time);
   fprintf(f, "%s xmms_autostart %d\n", CONFIG_KEYWORD, xmms_autostart);
   fprintf(f, "%s auto_main_close %d\n", CONFIG_KEYWORD, auto_main_close);
@@ -311,8 +302,6 @@ void load_gkrellmms_config(gchar *arg)
   {
     if (strcmp(config, "scroll_enable") == 0)
       sscanf(item, "%d\n", &scroll_enable);
-    else if (strcmp(config, "xmms_session") == 0)
-      sscanf(item, "%d\n", &xmms_session);
     else if (strcmp(config, "xmms_autostart") == 0)
       sscanf(item, "%d\n", &xmms_autostart);
     else if (strcmp(config, "auto_main_close") == 0)
@@ -413,7 +402,6 @@ void create_gkrellmms_config(GtkWidget *tab)
             *time_draw_entry,
             *pause_entry,
             *time_fmt_entry;
-  GtkAdjustment *adjust;
   GSList *eject_group = NULL,
          *time_draw_group = NULL,
          *pause_group = NULL,
@@ -423,19 +411,19 @@ void create_gkrellmms_config(GtkWidget *tab)
   gint i;
   static gchar *gkrellmms_help_text[] =
   {
-    N_("GKrellMMS is a GKrellM XMMS-plugin which allows you to control \n" \
-    "XMMS from within GKrellM. It features some cool things, such as: \n" \
+    N_("GKrellMMS is a GKrellM Audacious-plugin which allows you to control \n" \
+    "Audacious from within GKrellM. It features some cool things, such as: \n" \
     "\n" \
     "- A scrolling title. \n" \
     "- A Krell which indicates where you are in a song. \n" \
-    "- Themeable buttons for controlling XMMS. \n" \
+    "- Themeable buttons for controlling Audacious. \n" \
     "- A playlist editor. \n" \
-    "- A gtk-popup-menu with misc. XMMS-functions. \n" \
+    "- A gtk-popup-menu with misc. Audacious-functions. \n" \
     "\n"),
 
     N_("<b>How to use GKrellMMS: \n"),
     N_("\n" \
-    "You can do some cool stuff with the XMMS-Krell, by using your mouse. \n" \
+    "You can do some cool stuff with the Audacious-Krell, by using your mouse. \n" \
     "\n"),
 
     N_("<b>Mouse actions: \n" \
@@ -443,8 +431,8 @@ void create_gkrellmms_config(GtkWidget *tab)
     N_("Jump through song. \n"),
 
     N_("<b>\tMiddle mouse-button: "),
-    N_("Pause/stop/play XMMS (configurable), \n" \
-    "\t  or launch XMMS if it's not running. \n"),
+    N_("Pause/stop/play Audacious (configurable), \n" \
+    "\t  or launch Audacious if it's not running. \n"),
 
     N_("<b>\tRight mouse-button: "),
     N_("Popup-menu. \n" \
@@ -453,16 +441,16 @@ void create_gkrellmms_config(GtkWidget *tab)
     "\n"),
 
     N_("<b>\tConstant red: "),
-    N_("XMMS is turned off. \n"),
+    N_("Audacious is turned off. \n"),
 
     N_("<b>\tConstant green: "),
-    N_("XMMS is playing. \n"),
+    N_("Audacious is playing. \n"),
 
     N_("<b>\tRed, blinking green: "),
-    N_("XMMS is stopped. \n"),
+    N_("Audacious is stopped. \n"),
 
     N_("<b>\tGreen, blinking red: "),
-    N_("XMMS is paused. \n" \
+    N_("Audacious is paused. \n" \
     "\n"),
 
     N_("<b>Configurabilities:\n"),
@@ -473,15 +461,15 @@ void create_gkrellmms_config(GtkWidget *tab)
 
     N_("<b>Configs tab: \n" \
     "\n" \
-    "\tXMMS Executable: \n"),
+    "\tAudacious Executable: \n"),
 
-    N_("\tHow the XMMS-executable (+ eventually path) \n" \
-    "\tis called on your computer. Default is xmms\n" \
+    N_("\tHow the Audacious-executable (+ eventually path) \n" \
+    "\tis called on your computer. Default is audacious\n" \
     "\n"),
 
     N_("<b>\tFiles Directory: \n"),
     N_("\tThe directory where your mp3's/xm's/whatever \n" \
-    "\tare stored in. When starting XMMS from GKrellM, it will go to this \n" \
+    "\tare stored in. When starting Audacious from GKrellM, it will go to this \n" \
     "\tdirectory when ejecting. \n" \
     "\n"),
   
@@ -490,7 +478,7 @@ void create_gkrellmms_config(GtkWidget *tab)
     "\n"),
 
     N_("<b>\tKrell label: \n"),
-    N_("\tThe text-label you want in the krell when xmms isn't running/playing. \n" \
+    N_("\tThe text-label you want in the krell when Audacious isn't running/playing. \n" \
     "\n"),
   
     N_("<b>\tScroll separator: \n"),
@@ -498,11 +486,6 @@ void create_gkrellmms_config(GtkWidget *tab)
     "\tIt defaults to '   ***   ' (that's 3 spaces, 3 *'s and 3 spaces). \n" \
     "\n"),
 
-    N_("<b>\tXMMS Session to use: \n"),
-    N_("\tThe XMMS-session you want to use with GKrellMMS. \n" \
-    "\tUse 0 if you only have 1 XMMS running. \n" \
-    "\n"),
-  
     N_("<b>Toggles tab: \n" \
     "\n" \
     "\tDraw minus (-) with remaining time: \n"),
@@ -510,23 +493,23 @@ void create_gkrellmms_config(GtkWidget *tab)
     N_("\tDraw a minus (-) before the remaining time, when you have \n" \
     "\tthe output-time displaying remaining time. \n\n"),
 
-    N_("<b>\tXMMS Auto Launch: \n"),
-    N_("\tAuto launch XMMS when starting GKrellMMS. \n" \
+    N_("<b>\tAudacious Auto Launch: \n"),
+    N_("\tAuto launch Audacious when starting GKrellMMS. \n" \
     "\n"),
   
     N_("<b>\tAuto Mainwindow Close: \n"),
-    N_("\tAutomatically close the XMMS-mainwindow \n" \
-    "\twhen GKrellMMS starts, and XMMS is already running, or when \n" \
-    "\tlaunching XMMS while GKrellMMS runs. This option also enables the \n" \
+    N_("\tAutomatically close the Audacious-mainwindow \n" \
+    "\twhen GKrellMMS starts, and Audacious is already running, or when \n" \
+    "\tlaunching Audacious while GKrellMMS runs. This option also enables the \n" \
     "\tmainwindow back when you quit gkrellm (some people really do). \n" \
     "\n"),
 
-    N_("<b>\tAuto hide all XMMS windows: \n"),
-    N_("\tAutomatically hide all XMMS windows when GKrellMMS starts. \n" \
+    N_("<b>\tAuto hide all Audacious windows: \n"),
+    N_("\tAutomatically hide all Audacious windows when GKrellMMS starts. \n" \
      "\n"),
 
     N_("<b>\tAuto start playing: \n"),
-    N_("\tAutomatically start playing when launching XMMS. \n\n"),
+    N_("\tAutomatically start playing when launching Audacious. \n\n"),
 
     N_("<b>\tEnable scrolling title: \n"),
     N_("\tEnable/disable the scrolling title-panel. \n" \
@@ -537,13 +520,13 @@ void create_gkrellmms_config(GtkWidget *tab)
     "\tEject opens: \n"),
 
     N_("\tCheck whether the eject-button on the button-bar opens a \n" \
-    "\tplaylist or an other XMMS-file. \n" \
+    "\tplaylist or an other Audacious-file. \n" \
     "\n"),
   
     N_("<b>\tMMB on krell click: \n"),
     N_("\tCheck whether GKrellMMS should pause/continue or \n" \
     "\tstop/play the current song on a MMB-click on the krell. MMB Click will \n" \
-    "\talways start playing the song if XMMS isn't playing. \n" \
+    "\talways start playing the song if Audacious isn't playing. \n" \
     "\n"),
 
     N_("<b>\tLoad file-info: \n"),
@@ -553,7 +536,7 @@ void create_gkrellmms_config(GtkWidget *tab)
     "\tplaylist editor, or are playing on a slow network/cdrom. \n\n"),
 
     N_("<b>\tDraw in time bar: \n"),
-    N_("\tCheck whether to draw the output time or 'xmms' in \n" \
+    N_("\tCheck whether to draw the output time or 'audacious' in \n" \
     "\tthe time-krell panel. \n" \
     "\n"),
 
@@ -577,7 +560,7 @@ void create_gkrellmms_config(GtkWidget *tab)
   hbox = gtk_hbox_new(FALSE, 5);
 
   zbox = gtk_vbox_new(FALSE, 0);
-  label = gtk_label_new(_("XMMS Executable:"));
+  label = gtk_label_new(_("Audacious Executable:"));
   gtk_box_pack_start(GTK_BOX(zbox), label, TRUE, FALSE, 0);
   label = gtk_label_new(_("Files Directory:"));
   gtk_box_pack_start(GTK_BOX(zbox), label, TRUE, FALSE, 0);
@@ -618,17 +601,6 @@ void create_gkrellmms_config(GtkWidget *tab)
   gtk_box_pack_start(GTK_BOX(hbox), zbox, FALSE, FALSE, 0);
   gtk_container_add(GTK_CONTAINER(vbox), hbox);
 
-  hbox = gtk_hbox_new(FALSE, 5);
-  adjust = (GtkAdjustment *) gtk_adjustment_new((gfloat) xmms_session, 0.0,
-                             100.0, 1.0, 5.0, 0.0);
-  session_entry = gtk_spin_button_new(adjust, 1.0, 1);
-  gtk_spin_button_set_digits(GTK_SPIN_BUTTON(session_entry), (guint) 0);
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(session_entry), xmms_session);
-  gtk_box_pack_start(GTK_BOX(hbox), session_entry, FALSE, FALSE, 0);
-  label = gtk_label_new(_("XMMS Session to use"));
-  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-  gtk_container_add(GTK_CONTAINER(vbox), hbox);
-
   label = gtk_label_new(_("Configs"));
   gtk_container_add(GTK_CONTAINER(frame), vbox);
   gtk_notebook_append_page(GTK_NOTEBOOK(laptop), frame, label);
@@ -644,19 +616,19 @@ void create_gkrellmms_config(GtkWidget *tab)
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(draw_minus_entry), draw_minus);  
   gtk_container_add(GTK_CONTAINER(vbox), draw_minus_entry);
 
-  xmms_start_entry = gtk_check_button_new_with_label(_("Auto launch XMMS on GKrellMMS startup"));
+  xmms_start_entry = gtk_check_button_new_with_label(_("Auto launch Audacious on GKrellMMS startup"));
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(xmms_start_entry), xmms_autostart);
   gtk_container_add(GTK_CONTAINER(vbox), xmms_start_entry);
 
-  main_close_entry = gtk_check_button_new_with_label(_("Auto close (and open) XMMS Mainwin"));
+  main_close_entry = gtk_check_button_new_with_label(_("Auto close (and open) Audacious Mainwin"));
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(main_close_entry), auto_main_close);
   gtk_container_add(GTK_CONTAINER(vbox), main_close_entry);
 
-  hide_all_entry = gtk_check_button_new_with_label(_("Auto hide all XMMS windows on XMMS startup"));
+  hide_all_entry = gtk_check_button_new_with_label(_("Auto hide all Audacious windows on Audacious startup"));
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(hide_all_entry), auto_hide_all);
   gtk_container_add(GTK_CONTAINER(vbox), hide_all_entry);
 
-  auto_play_entry = gtk_check_button_new_with_label(_("Auto start playing on XMMS launch"));
+  auto_play_entry = gtk_check_button_new_with_label(_("Auto start playing on Audaciou launch"));
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(auto_play_entry), auto_play_start);
   gtk_container_add(GTK_CONTAINER(vbox), auto_play_entry);
 
@@ -720,7 +692,7 @@ void create_gkrellmms_config(GtkWidget *tab)
   gtk_signal_connect(GTK_OBJECT(time_draw_entry), "pressed",
                      (GtkSignalFunc) time_type_set, GINT_TO_POINTER(1));
 
-  time_draw_entry = gtk_radio_button_new_with_label(time_draw_group, _("XMMS-text"));
+  time_draw_entry = gtk_radio_button_new_with_label(time_draw_group, _("Audacious-text"));
   gtk_box_pack_start(GTK_BOX(zbox), time_draw_entry, FALSE, FALSE, 0);
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(time_draw_entry), !draw_time);
   gtk_signal_connect(GTK_OBJECT(time_draw_entry), "pressed",
@@ -840,8 +812,9 @@ void create_gkrellmms_config(GtkWidget *tab)
   /* About */
   gkrellmms_info_text = g_strdup_printf(
     _("GKrellMMS %d.%d.%d\n" \
-    "GKrellM XMMS Plugin\n" \
+    "GKrellM Audacious Plugin\n" \
     "\n" \
+    "Copyright (C) 2008      Sascha Hlusiak <contact@saschahlusiak.de>\n"\
     "Copyright (C) 2000-2002 Sander Klein Lebbink <sander@cerberus.demon.nl>\n"\
     "Current Maintainer: Sjoerd Simons <sjoerd@luon.net>\n" \
     "http://gkrellm.luon.net/\n" \

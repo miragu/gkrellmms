@@ -82,6 +82,8 @@ static gboolean got_motion;
 static gint style_id;
 static GkrellmTicks *pGK;
 
+DBusGProxy* proxy = NULL;
+
 /* drag and drop support */
 
 enum {
@@ -103,25 +105,25 @@ void do_xmms_command(gint i) {
   if (!xmms_running) return ;
 
   switch (i) {
-    case gkrellmms_prev: xmms_remote_playlist_prev(xmms_session); break;
+    case gkrellmms_prev: audacious_remote_playlist_prev(proxy); break;
     case gkrellmms_play:
-      if (xmms_remote_is_playing(xmms_session) && 
-          !xmms_remote_is_paused(xmms_session)) 
-        xmms_remote_pause(xmms_session);
+      if (audacious_remote_is_playing(proxy) && 
+          !audacious_remote_is_paused(proxy)) 
+        audacious_remote_pause(proxy);
       else
-        xmms_remote_play(xmms_session);
+        audacious_remote_play(proxy);
       break;
-    case gkrellmms_paus: xmms_remote_pause(xmms_session); break;
+    case gkrellmms_paus: audacious_remote_pause(proxy); break;
     case gkrellmms_stop:
-      xmms_remote_stop(xmms_session);
+      audacious_remote_stop(proxy);
 // FIXME      time_krell->previous = t = 0;
       break;
-    case gkrellmms_next: xmms_remote_playlist_next(xmms_session); break;
+    case gkrellmms_next: audacious_remote_playlist_next(proxy); break;
     case gkrellmms_eject:
       if (eject_opens_playlist)
         pl_show_playlist();
       else
-        xmms_remote_eject(xmms_session);
+        audacious_remote_eject(proxy);
       break;
   }
 }
@@ -211,13 +213,13 @@ update_gkrellmms() {
 
   playlist_changed = update_playlist();
 
-	if ((xmms_running = xmms_remote_is_running(xmms_session))) {
+	if ((xmms_running = audacious_remote_is_running(proxy))) {
     /* position is changed in the playlist when the playlist is changed too !
      */
     position_changed = 
       pl_get_current_position() != prev_position || playlist_changed;
     prev_position = pl_get_current_position();
-		xmms_playing = xmms_remote_is_playing(xmms_session);
+		xmms_playing = audacious_remote_is_playing(proxy);
 
 		if (scroll_panel) {
 			/* Scrollbar */
@@ -228,7 +230,7 @@ update_gkrellmms() {
 				scrolling_title_text = get_scrolling_title_text(&len, FALSE);
 				time = pl_get_current_time();
 				if (scrolling_tooltip != NULL) {
-					xmms_remote_get_info(xmms_session, &rate, &freq, &nch);
+					audacious_remote_get_info(proxy, &rate, &freq, &nch);
 					prev_scrolling_tooltip_text = scrolling_tooltip_text;
           scrolling_tooltip_text = g_strdup_printf("%s\n%d%s - %dHz - %s",
 				  scrolling_title_text, rate / 1000,
@@ -297,7 +299,7 @@ update_gkrellmms() {
 	if (slider_in_motion == NULL) {
 		xmms_decal->x_off = 1;
 		if(xmms_running && (xmms_playing || position_changed) && draw_time){ 
-		  output_time = xmms_remote_get_output_time(xmms_session);
+		  output_time = audacious_remote_get_output_time(proxy);
       /* calculate slider position */
   	  slider_position = pl_get_current_time() ? 
                              ((output_time * 100) / pl_get_current_time()) : 0;
@@ -334,7 +336,7 @@ update_gkrellmms() {
 		if (!xmms_running)  {
       on_index = led_playing_index;
       off_index = led_off_index;
-    } else if (xmms_remote_is_paused(xmms_session)) {
+    } else if (audacious_remote_is_paused(proxy)) {
 			on_index = led_off_index;	/* invert the duty cycle */
 			off_index = led_paused_index;
 		} else if (!xmms_playing) {
@@ -397,9 +399,9 @@ static void
 drag_data_received(GtkWidget *window,GdkDragContext *context, gint x, gint y,
                    GtkSelectionData *data,guint info,guint time,gpointer date) {
   if (data->data) {
-    xmms_remote_playlist_clear(xmms_session);
-    xmms_remote_playlist_add_url_string(xmms_session,(gchar *)data->data);
-    xmms_remote_play(xmms_session);
+    audacious_remote_playlist_clear(proxy);
+    audacious_remote_playlist_add_url_string(proxy,(gchar *)data->data);
+    audacious_remote_play(proxy);
     update_playlist();
   }
 }
@@ -437,29 +439,29 @@ panel_button_release(GtkWidget *widget, GdkEventButton *ev, gpointer data) {
      | P200 I really notice some bugs without it.
      */
     if (!xmms_playing)
-      xmms_remote_play(xmms_session);
+      audacious_remote_play(proxy);
     timer = time(&lt);
 
     /* Do nothing, wait until xmms really plays;
      | stop waiting after 10 seconds.
      */
     /* FIXME ugly evil code */
-    while (!xmms_remote_is_playing(xmms_session) && ((time(&lt) - timer) < 10))
+    while (!audacious_remote_is_playing(proxy) && ((time(&lt) - timer) < 10))
     {
       usleep(0);
     }
 
-    xmms_remote_jump_to_time(xmms_session, where_to_jump);
+    audacious_remote_jump_to_time(proxy, where_to_jump);
 
     timer = localtime(&lt)->tm_sec;
 
     /* Wait till really jumped before we continue. */
-    while ((xmms_remote_get_output_time(xmms_session) / 1000) 
+    while ((audacious_remote_get_output_time(proxy) / 1000) 
         != (where_to_jump / 1000) && ((time(&lt) - timer) < 10))
       usleep(0);
   }
   else if((slider_in_motion != NULL) && !xmms_playing)
-    xmms_remote_play(xmms_session);
+    audacious_remote_play(proxy);
 
   slider_in_motion = NULL;
   got_motion = FALSE;
@@ -482,15 +484,15 @@ panel_button_press(GtkWidget *widget, GdkEventButton *ev, gpointer data) {
         xmms_start_func();
       break;
     case 2:
-      if (xmms_running && xmms_remote_is_playing(xmms_session))
+      if (xmms_running && audacious_remote_is_playing(proxy))
       {
         if (krell_mmb_pause)
-          xmms_remote_pause(xmms_session);
+          audacious_remote_pause(proxy);
         else
-          xmms_remote_stop(xmms_session);
+          audacious_remote_stop(proxy);
       }
       else if (xmms_running)
-        xmms_remote_play(xmms_session);
+        audacious_remote_play(proxy);
       else
         xmms_start_func();
       break;
@@ -811,16 +813,15 @@ create_gkrellmms(GtkWidget *vbox, gint first_create) {
 	static GkrellmPiximage *bg_scroll_image;
 
 	if (first_create) {
-		xmms_running = xmms_remote_is_running(xmms_session);
+		xmms_running = audacious_remote_is_running(proxy);
 		if (auto_main_close && xmms_running)
-      xmms_remote_main_win_toggle(xmms_session, FALSE);
+			audacious_remote_main_win_toggle(proxy, FALSE);
 		if (xmms_autostart && !xmms_running)  xmms_start_func();
-     
-    pl_init();
+    		pl_init();
 		control_panel = gkrellm_panel_new0();
 	} else {
-    update_playlist();
-  }
+		update_playlist();
+	}
 
 	style = gkrellm_meter_style(DEFAULT_STYLE);
 	if (scroll_style) g_free(scroll_style);
@@ -860,7 +861,7 @@ create_gkrellmms(GtkWidget *vbox, gint first_create) {
 
     if (scrolling_tooltip == NULL) {
 		scrolling_tooltip = gtk_tooltips_new();
-		scrolling_tooltip_text = g_strdup("xmms");
+		scrolling_tooltip_text = g_strdup("audacious");
 		gtk_tooltips_set_tip(scrolling_tooltip, scroll_panel->drawing_area,
 					scrolling_tooltip_text, NULL);
 		gtk_tooltips_set_delay(scrolling_tooltip, 750);
@@ -874,7 +875,7 @@ create_gkrellmms(GtkWidget *vbox, gint first_create) {
 	gkrellm_set_krell_full_scale(time_krell, 100, 1);
 
 	m = gkrellm_get_style_margins(style);
-	w = gkrellm_gdk_string_width(ts->font, "-000:00");
+	w = gkrellm_gdk_string_width(ts->font, "-000:00xxx");
 	xmms_decal = gkrellm_create_decal_text(control_panel, (gchar *) "A0", ts,
 				style, -1, -1, w);
 	xmms_decal->x += m->left;
@@ -973,7 +974,7 @@ create_gkrellmms(GtkWidget *vbox, gint first_create) {
 void mainwin_back_func()
 {
   if (auto_main_close && xmms_running)
-    xmms_remote_main_win_toggle(xmms_session, TRUE);
+    audacious_remote_main_win_toggle(proxy, TRUE);
 }
 
 static GkrellmMonitor  plugin_mon  =
@@ -1007,6 +1008,8 @@ gkrellmms_get_monitor(void) {
 GkrellmMonitor *
 gkrellm_init_plugin(void) {
   gchar *tmp;
+  GError *error = NULL;
+  static DBusGConnection *connection = NULL;
 
 #ifdef ENABLE_NLS
    bind_textdomain_codeset(PACKAGE, "UTF-8");
@@ -1015,6 +1018,14 @@ gkrellm_init_plugin(void) {
 	/* Popup-menu set */
 	running_factory = options_menu_factory(1);
 	not_running_factory = options_menu_factory(0);
+
+
+
+  connection = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
+
+  proxy = dbus_g_proxy_new_for_name(connection, AUDACIOUS_DBUS_SERVICE,
+                                    AUDACIOUS_DBUS_PATH,
+                                    AUDACIOUS_DBUS_INTERFACE);
 
   /* Default settings */
   control_panel = NULL;
@@ -1033,16 +1044,11 @@ gkrellm_init_plugin(void) {
 
   playlist_dir = g_strdup(gkrellm_homedir());
   files_directory = g_strdup("/");
-  gkrellmms_label = g_strdup("xmms");
-  xmms_session = 0;
+  gkrellmms_label = g_strdup("audacious");
   scroll_enable = TRUE;
   scroll_separator = g_strdup(SCROLL_SEPARATOR);
   draw_time = 1;
-#ifdef USE_BMP
-  xmms_exec_command = g_strdup("beep-media-player");
-#else
-  xmms_exec_command = g_strdup("xmms");
-#endif
+  xmms_exec_command = g_strdup("audacious");
   xmms_autostart = 0;
   auto_main_close = 0;
   auto_hide_all = 0;

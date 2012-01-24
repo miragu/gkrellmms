@@ -8,23 +8,17 @@ GTK_LIB ?= `pkg-config gtk+-2.0 --libs`
 IMLIB_INCLUDE ?= 
 IMLIB_LIB ?= 
 
-ifdef USE_BMP
-   XMMS_INCLUDE ?= `pkg-config bmp --cflags`
-   XMMS_LIB ?= `pkg-config bmp --libs`
-else
-   XMMS_INCLUDE ?= `xmms-config --cflags`
-   XMMS_LIB ?= `xmms-config --libs`
-endif
+XMMS_INCLUDE ?= `pkg-config audacious --cflags`
+XMMS_LIB ?= `pkg-config audacious --libs`
+
+DBUS_INCLUDE ?= `pkg-config dbus-1 --cflags`
+DBUS_LIB ?= `pkg-config dbus-1 --libs`
 
 PLUGIN_DIR ?= /usr/local/lib/gkrellm2/plugins
 
-FLAGS = -O2 -Wall -fPIC $(GTK_INCLUDE) $(IMLIB_INCLUDE) $(XMMS_INCLUDE)
-LIBS = $(GTK_LIB) $(IMLIB_LIB) $(XMMS_LIB)
+FLAGS = -O2 -Wall -fPIC $(GTK_INCLUDE) $(IMLIB_INCLUDE) $(DBUS_INCLUDE) $(XMMS_INCLUDE)
+LIBS = $(GTK_LIB) $(IMLIB_LIB) $(DBUS_LIB) $(XMMS_LIB)
 LFLAGS = -shared -lpthread
-
-ifdef USE_BMP
-   FLAGS += -DUSE_BMP
-endif
 
 LOCALEDIR ?= /usr/share/locale
 ifeq ($(enable_nls),1)

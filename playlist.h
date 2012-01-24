@@ -24,11 +24,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#ifdef USE_BMP
-#include <bmp/beepctrl.h>
-#else
-#include <xmms/xmmsctrl.h>
-#endif
+#include <audacious/auddrct.h>
 
 #include "gkrellmms.h"
 

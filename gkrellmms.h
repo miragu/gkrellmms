@@ -25,11 +25,9 @@
 #include <time.h>
 #include <gkrellm2/gkrellm.h>
 
-#ifdef USE_BMP
-#include <bmp/beepctrl.h>
-#else
-#include <xmms/xmmsctrl.h>
-#endif
+#include <audacious/audctrl.h>
+#include <audacious/dbus.h>
+
 
 #include "playlist.h"
 /* You can change these ones, but at your own risk.
@@ -105,6 +103,8 @@
 
 
 /* Very global vars */
+extern DBusGProxy* proxy;
+
 GtkItemFactory *running_factory;
 GtkItemFactory *not_running_factory;
 
@@ -120,7 +120,6 @@ gchar *gkrellmms_label;
 gchar *scroll_separator;
 gint scroll_enable;
 gint enable_buttonbar;
-gint xmms_session;
 gint xmms_autostart;
 gint auto_main_close;
 gint auto_hide_all;
