@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#include <audacious/auddrct.h>
+//#include <audacious/auddrct.h>
 
 #include "gkrellmms.h"
 

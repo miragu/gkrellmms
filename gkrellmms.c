@@ -357,8 +357,8 @@ update_gkrellmms() {
 
 static gint
 panel_expose_event(GtkWidget *widget, GdkEventExpose *ev, GkrellmPanel *p) {
-  gdk_draw_pixmap(widget->window,
-                  widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
+  gdk_draw_pixmap(gtk_widget_get_window(widget),
+                  gtk_widget_get_style(widget)->fg_gc[gtk_widget_get_state(widget)],
                   p->pixmap,
                   ev->area.x, ev->area.y, ev->area.x,
                   ev->area.y, ev->area.width, ev->area.height);
@@ -398,9 +398,9 @@ slider_motion(GtkWidget *widget, GdkEventMotion *ev, gpointer data) {
 static void 
 drag_data_received(GtkWidget *window,GdkDragContext *context, gint x, gint y,
                    GtkSelectionData *data,guint info,guint time,gpointer date) {
-  if (data->data) {
+  if (gtk_selection_data_get_target(data)) {
     audacious_remote_playlist_clear(proxy);
-    audacious_remote_playlist_add_url_string(proxy,(gchar *)data->data);
+    audacious_remote_playlist_add_url_string(proxy,(gchar *)gtk_selection_data_get_target(data));
     audacious_remote_play(proxy);
     update_playlist();
   }

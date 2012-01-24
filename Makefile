@@ -9,7 +9,7 @@ IMLIB_INCLUDE ?=
 IMLIB_LIB ?= 
 
 XMMS_INCLUDE ?= `pkg-config audacious --cflags`
-XMMS_LIB ?= `pkg-config audacious --libs`
+XMMS_LIB ?= `pkg-config audacious --libs` -laudclient
 
 DBUS_INCLUDE ?= `pkg-config dbus-1 --cflags`
 DBUS_LIB ?= `pkg-config dbus-1 --libs`

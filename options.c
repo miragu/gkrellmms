@@ -55,12 +55,14 @@ void toggles_func (GtkWidget *w, gpointer what)
         !audacious_remote_is_main_win(proxy));
       break;
     case gkrellmms_playlist:
+/* removed from remote api
       audacious_remote_pl_win_toggle(proxy,
-        !audacious_remote_is_pl_win(proxy));
+        !audacious_remote_is_pl_win(proxy)); */
       break;
     case gkrellmms_eq:
+/* removed from remote api
       audacious_remote_eq_win_toggle(proxy,
-        !audacious_remote_is_eq_win(proxy));
+        !audacious_remote_is_eq_win(proxy)); */
       break;
     case gkrellmms_repeat:
       audacious_remote_toggle_repeat(proxy);
@@ -124,8 +126,9 @@ void xmms_start_func ()
 
 	if (auto_hide_all && xmms_running) {
     audacious_remote_main_win_toggle(proxy, FALSE);
+/* removed from remote api
     audacious_remote_pl_win_toggle(proxy, FALSE);
-    audacious_remote_eq_win_toggle(proxy, FALSE);
+    audacious_remote_eq_win_toggle(proxy, FALSE); */
 	}
 }
 
@@ -258,12 +261,12 @@ void apply_gkrellmms_config()
 
   /* Toggles */
   prev_scroll_enable = scroll_enable;
-  scroll_enable = GTK_TOGGLE_BUTTON(scroll_enable_entry)->active;
-  xmms_autostart = GTK_TOGGLE_BUTTON(xmms_start_entry)->active;
-  auto_main_close = GTK_TOGGLE_BUTTON(main_close_entry)->active;
-  auto_hide_all = GTK_TOGGLE_BUTTON(hide_all_entry)->active;
-  auto_play_start = GTK_TOGGLE_BUTTON(auto_play_entry)->active;
-  draw_minus = GTK_TOGGLE_BUTTON(draw_minus_entry)->active;
+  scroll_enable = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(scroll_enable_entry));
+  xmms_autostart = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(xmms_start_entry));
+  auto_main_close = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(main_close_entry));
+  auto_hide_all = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(hide_all_entry));
+  auto_play_start = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(auto_play_entry));
+  draw_minus = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(draw_minus_entry));
 
   /* Switches */
   eject_opens_playlist = eject_thing;
